@@ -1,4 +1,3 @@
-// Import and Export your Images here
 import FLOWER1 from "../Images/Flower1.jpg";
 import FLOWER2 from "../Images/Flower2.jpg";
 import FLOWER3 from "../Images/Flower3.jpg";
