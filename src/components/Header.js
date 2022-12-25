@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Header({ turns, onShuffle }) {
+  const [turns, setTurns] = useState(0);
   return (
     <>
       <h1>Test your memory!</h1>
