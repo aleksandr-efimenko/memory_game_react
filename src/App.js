@@ -6,6 +6,13 @@ import './App.css';
 function App() {
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
+  const [choiceOne, setChoiceOne] = useState(null);
+  const [choiceTwo, setChoiceTwo] = useState(null);
+
+  // Handle Choice by adding the clicked cards in the two slot state defined
+  const handleChoice = (card) => {
+    choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+  };
 
   //Shuffle the cards
   const shuffleCards = () => {
