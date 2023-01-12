@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { cardImages } from './components/Images';
+import { cardImages } from './Components/Images';
+import Header from './Components/Header';
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header turns={turns} onShuffle={shuffleCards} />
     </div>
   );
 }
