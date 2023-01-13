@@ -1,11 +1,11 @@
-import FLOWER1 from "../Images/Flower1.jpg";
-import FLOWER2 from "../Images/Flower2.jpg";
-import FLOWER3 from "../Images/Flower3.jpg";
-import FLOWER4 from "../Images/Flower4.jpg";
-import FLOWER5 from "../Images/Flower5.jpg";
-import FLOWER6 from "../Images/Flower6.jpg";
+import FLOWER1 from "../images/Flower1.jpg";
+import FLOWER2 from "../images/Flower2.jpg";
+import FLOWER3 from "../images/Flower3.jpg";
+import FLOWER4 from "../images/Flower4.jpg";
+import FLOWER5 from "../images/Flower5.jpg";
+import FLOWER6 from "../images/Flower6.jpg";
 
-const cardImages = [{
+const cardimages = [{
     src: FLOWER1,
     matched: false
 },
@@ -31,4 +31,4 @@ const cardImages = [{
 },
 ]
 
-export default cardImages;
+export default cardimages;

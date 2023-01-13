@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import cardImages from './Components/Images';
-import Header from './Components/Header';
-import Grid from './Components/Grid';
+import cardImages from './components/Images';
+import Header from './components/Header';
+import Grid from './components/Grid';
 import './App.css';
 
 function App() {
