@@ -25,10 +25,37 @@ function App() {
       setTurns(0);
   }
 
+  const backToDefault = () => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setDisabled(false);
+    setTurns((prevTurns) => prevTurns + 1);
+  }
+
   // Call the function to shuffle cards only at first render
   useEffect(() => {
     shuffleCards();
   }, [])
+
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      setDisabled(true);
+      if (choiceOne.src === choiceTwo.src) {
+        setCards((prevCards) => {
+          return prevCards.map((card) => {
+            if (card.src === choiceOne.src) {
+              return {...card, matched: true};
+            } else {
+              return card;
+            };
+          })
+        })
+        backToDefault();
+      } else {
+        setTimeout(() => backToDefault(), 500);
+      }
+    }
+  }, [choiceOne, choiceTwo])
 
   return (
     <div className="App">
