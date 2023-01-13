@@ -1,5 +1,5 @@
 import React from 'react';
-import Educative from '../Images/EducativeIcon.png';
+import Educative from '../images/EducativeIcon.png';
 
 export default function Card({ card, flipped, disabled, handleChoice }) {
   const handleClick = () => {
