@@ -31,4 +31,4 @@ const cardImages = [{
 },
 ]
 
-export { cardImages };
+export default cardImages;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { cardImages } from './Components/Images';
+import cardImages from './Components/Images';
 import Header from './Components/Header';
 import Grid from './Components/Grid';
 import './App.css';
@@ -10,7 +10,7 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
-  
+
   //check winner
   const [winner, setWinner] = useState(null);
   const [exceeds, setExceeds] = useState(null);
@@ -25,13 +25,13 @@ function App() {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
-      setCards(shuffledCards);
-      setTurns(0);
-      setWinner(false);
-      setExceeds(false);
-      setDisabled(false);
-      setChoiceOne(null);
-      setChoiceTwo(null);
+    setCards(shuffledCards);
+    setTurns(0);
+    setWinner(false);
+    setExceeds(false);
+    setDisabled(false);
+    setChoiceOne(null);
+    setChoiceTwo(null);
   }
 
   // Reset after checking 2 cards
@@ -55,7 +55,7 @@ function App() {
         setCards((prevCards) => {
           return prevCards.map((card) => {
             if (card.src === choiceOne.src) {
-              return {...card, matched: true};
+              return { ...card, matched: true };
             } else {
               return card;
             };
@@ -88,7 +88,7 @@ function App() {
       <Header turns={turns} onShuffle={shuffleCards} />
       {winner ? <div className='result'>Congratulations, You win!!</div> : <></>}
       {exceeds ? <div className='result'>You are out of turns!:(</div> : <></>}
-      <Grid 
+      <Grid
         cards={cards}
         choiceOne={choiceOne}
         choiceTwo={choiceTwo}
