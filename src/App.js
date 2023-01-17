@@ -4,66 +4,67 @@ import Header from './components/Header';
 import Grid from './components/Grid';
 import './App.css';
 
-function App() {
-  const [cards, setCards] = useState([]);
-  const [turns, setTurns] = useState(0);
-  const [choiceOne, setChoiceOne] = useState(null);
-  const [choiceTwo, setChoiceTwo] = useState(null);
-  const [disabled, setDisabled] = useState(false);
 
-  //check winner
+function App() {
+  const [cards, setCards] = useState([]); // state variable to keep track of all cards
+  const [turns, setTurns] = useState(0); // state variable to keep track of the number of turns
+  const [choiceOne, setChoiceOne] = useState(null); // state variable to store the first selected card
+  const [choiceTwo, setChoiceTwo] = useState(null); // state variable to store the second selected card
+  const [disabled, setDisabled] = useState(false); // state variable to keep track of if the cards are clickable or not
+
+  // state variables to check if the player wins or loses
   const [winner, setWinner] = useState(null);
   const [exceeds, setExceeds] = useState(null);
 
-  // Handle Choice by adding the clicked cards in the two slot state defined
+  // function to handle the selection of a card
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
   };
 
-  //Shuffle the cards
+  // function to shuffle the cards
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }));
     setCards(shuffledCards);
-    setTurns(0);
-    setWinner(false);
-    setExceeds(false);
-    setDisabled(false);
-    setChoiceOne(null);
-    setChoiceTwo(null);
+    setTurns(0); // reset turns
+    setWinner(false); // reset winner status
+    setExceeds(false); // reset exceeded turns status
+    setDisabled(false); // reset cards clickable status
+    setChoiceOne(null); // reset selected card 1
+    setChoiceTwo(null); // reset selected card 2
   }
 
-  // Reset after checking 2 cards
+  // function to reset the state after checking 2 cards
   const backToDefault = () => {
-    setChoiceOne(null);
-    setChoiceTwo(null);
-    setDisabled(false);
-    setTurns((prevTurns) => prevTurns + 1);
+    setChoiceOne(null); // reset selected card 1
+    setChoiceTwo(null); // reset selected card 2
+    setDisabled(false); // set cards clickable
+    setTurns((prevTurns) => prevTurns + 1); // increment turns
   }
 
-  // Call the function to shuffle cards only at first render
+  // useEffect hook to shuffle the cards only at first render
   useEffect(() => {
     shuffleCards();
   }, [])
 
-  // Check if the two cards clicked are matching
+  // useEffect hook to check if the two selected cards match
   useEffect(() => {
     if (choiceOne && choiceTwo) {
-      setDisabled(true);
-      if (choiceOne.src === choiceTwo.src) {
+      setDisabled(true); // set cards not clickable
+      if (choiceOne.src === choiceTwo.src) { // if the two cards match
         setCards((prevCards) => {
           return prevCards.map((card) => {
             if (card.src === choiceOne.src) {
-              return { ...card, matched: true };
+              return { ...card, matched: true }; // mark the cards as matched
             } else {
               return card;
             };
           })
         })
-        backToDefault();
+        backToDefault(); // reset the state
       } else {
-        setTimeout(() => backToDefault(), 500);
+        setTimeout(() => backToDefault(), 500); // wait for half a second before resetting the state
       }
     }
   }, [choiceOne, choiceTwo])
@@ -71,18 +72,19 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       const allMatched = cards.every((card) => card.matched === true);
-      if (turns >= 15) {
-        if (allMatched && turns === 15) {
-          setWinner(true);
+      if (turns >= 15) {  // check if the number of turns is greater than or equal to 15
+        if (allMatched && turns === 15) { // if all cards are matched and the number of turns is 15
+          setWinner(true); // set the winner status to true
         } else {
-          setExceeds(true);
-          setDisabled(true);
+          setExceeds(true); // set exceeded turns status to true
+          setDisabled(true); // set cards not clickable
         }
       } else if (allMatched && cards.length > 0) {
-        setWinner(true);
+        setWinner(true); // if all cards are matched and the number of turns is less than 15, set the winner status to true
       }
     }, 500);
   }, [turns, cards, winner])
+
   return (
     <div className="App">
       <Header turns={turns} onShuffle={shuffleCards} />
@@ -100,3 +102,5 @@ function App() {
 }
 
 export default App;
+
+
